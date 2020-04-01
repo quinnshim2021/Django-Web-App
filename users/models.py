@@ -10,8 +10,8 @@ class Profile(models.Model):
         return f'{self.user.username} Profile'
 
     # override save to add our own funcitonality (resize large images)
-    def save(self, **kwargs):
-        super().save()
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
 
         img = Image.open(self.image.path)
 
