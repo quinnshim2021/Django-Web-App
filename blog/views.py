@@ -5,6 +5,7 @@ from .models import Post
 from django.contrib.auth.decorators import login_required
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 
+
 # old
 # @login_required
 # def home(request):
@@ -73,3 +74,8 @@ class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
 
 def about(request):
     return render(request, 'blog/about.html', {'title': 'About'})
+
+# def handler404(request, exception, template_name="404.html"):
+#     response = render(template_name)
+#     response.status_code = 404
+#     return response
