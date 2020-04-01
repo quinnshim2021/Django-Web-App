@@ -27,7 +27,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*'] # put website url here
+ALLOWED_HOSTS = ['quinnfirstdjangoapp.herokuapp.com'] # put website url here
 
 
 # Application definition
@@ -146,3 +146,5 @@ EMAIL_HOST_USER = os.environ.get('EMAIL_USER') # change these to new gmail crede
 EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_PASS')
 
 django_heroku.settings(locals())
+
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
