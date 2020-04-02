@@ -1,16 +1,22 @@
 {% extends "blog/base.html" %}
 {% block content %}
-    <h1 class="mb-3">Posts by {{ view.kwargs.username }} ({{ page_obj.paginator.count }}) 
-        {% if user in friends %}
-            <a href="remove/{{ user.pk}} ">
-                <button class="btn">Remove Friend</button>
+    <h1 class="mb-3">{{ view.kwargs.username }}
+        {% if u in friends %}
+            <a href="remove/{{ u.pk }} ">
+                <button class="btn btn-outline-danger">Remove Friend</button>
             </a>
         {% else %}
-            <a href="add/{{ user.pk}} ">
-                <button class="btn">Add Friend</button>
+            <a href="add/{{ u.pk }} ">
+                <button class="btn btn-outline-success">Add Friend</button>
             </a>
         {% endif %}
     </h1>
+    <div class="media content-section">
+        <blockquote class="blockquote text-center">
+            <p class="mb-0 mt-1">{{ u.profile.description }}</p>
+          </blockquote>
+    </div>
+    <hr>
     {% for post in posts %}
         <article class="media content-section">
             <img src="{{ post.author.profile.image.url }}" class="rounded-circle article-img">
@@ -32,7 +38,7 @@
 {% block content-friends %}
 <div class="col-md-4">
     <div class="content-section">
-        <h3>Friends</h3>
+        <h3>My Friends</h3>
         <!-- <p class='text-muted'>You can put any information here you'd like. -->
         <ul class="list-group">
             {% for friend in friends %} <!-- add this to nav bar in base instead or clean this up -->

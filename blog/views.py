@@ -37,8 +37,9 @@ class PostListView(LoginRequiredMixin, ListView):
 
     def get_context_data(self, **kwargs):
         context = super(PostListView, self).get_context_data(**kwargs)
-        context['posts'] = Post.objects.all().order_by('-date_posted')
-        context['friends'] = list(Friend.objects.get(current_user=self.request.user).users.all())
+        context['friends'] = Friend.objects.get(current_user=self.request.user).users.all()
+        context['posts'] = sorted([p for p in Post.objects.all() if p.author in context['friends'] or p.author == self.request.user], key=lambda x: x.date_posted, reverse=True)
+        # [p for p in Post.objects.all() if p.author in context['friends']].order_by('-date_posted')
         return context
 
 class UserListView(LoginRequiredMixin, ListView):
@@ -67,6 +68,7 @@ class UserPostListView(LoginRequiredMixin, ListView):
     def get_context_data(self, **kwargs):
         context = super(UserPostListView, self).get_context_data(**kwargs)
         context['posts'] = self.get_queryset()
+        context['u'] = get_object_or_404(User, username=self.kwargs.get('username'))
         context['friends'] = list(Friend.objects.get(current_user=self.request.user).users.all())
         print(list(Friend.objects.get(current_user=self.request.user).users.all()))
         return context

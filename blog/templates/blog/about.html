@@ -1,4 +1,22 @@
 {% extends "blog/base.html" %}
 {% block content %}
-    <h1>About Page!</h1>
+<div class="media content-section">
+    <blockquote class="blockquote text-center">
+        <p class="mb-0 mt-1">Shared Content is a place where users can share different videos, songs, or other media to share with their network of friends.</p>
+        <p class="mb-0 mt-1">This site was created by Quinn Shim as his first website using Django.</p>
+      </blockquote>
+</div>
 {% endblock content %}
+{% block content-friends %}
+<div class="col-md-4">
+    <div class="content-section">
+        <h3>Check Out More!</h3>
+        <ul class="list-group">
+            <li class="list-group-item list-group-item-light"><a href="https://www.linkedin.com/in/quinn-shim/" target="_blank">Quinn's LinkedIn</a></li>
+            <li class="list-group-item list-group-item-light"><a href="https://github.com/quinnshim2021" target="_blank">Quinn's GitHub</a></li>
+            <li class="list-group-item list-group-item-light"><a href="https://quinnshim2021.github.io/QS_PersonalWeb" target="_blank">Quinn's Personal Website</a></li>
+        </ul>
+        </p>
+    </div>
+</div>
+{% endblock %}

@@ -11,11 +11,11 @@
 
         <!-- include our css -->
         <link rel="stylesheet" type="text/css" href="{% static 'blog/main.css' %}">
-
+        <link rel="shortcut icon" type="image/png" href="icon.png"/>
         {% if title %}
-            <title>Django Blog - {{ title }}</title>
+            <title>Shared Content - {{ title }}</title>
         {% else %}
-            <title>Django Blog</title>
+            <title>Shared Content</title>
         {% endif %}
     </head>
 
@@ -23,7 +23,7 @@
         <header class="site-header">
             <nav class="navbar navbar-expand-md navbar-dark bg-steel fixed-top">
                 <div class="container">
-                <a class="navbar-brand mr-4" href="{% url 'blog-home' %}">Django Blog</a>
+                <a class="navbar-brand mr-4" href="{% url 'blog-home' %}">Shared Content</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
                 </button>

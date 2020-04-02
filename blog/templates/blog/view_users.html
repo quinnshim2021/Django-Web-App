@@ -9,15 +9,18 @@
         <article class="media content-section">
             <img src="{{ u.profile.image.url }}" class="rounded-circle article-img">
             <div class="media-body">
-                <h2 class="article-title">{{ u.username }} <small class="text-muted">- joined {{ u.date_joined|date:"F Y" }} </small> </h2>
+                
                 {% if u == user %}
+                <h2 class="article-title mt-2"><a style="text-decoration: none; color: #333333" href="{% url 'user-posts' u.username %}">{{ u.username }}</a><small class="text-muted h6"> joined {{ u.date_joined|date:"F Y" }} </small> </h2>
                 {% elif u in friends %}
+                <h2 class="article-title"><a style="text-decoration: none; color: #333333" href="{% url 'user-posts' u.username %}">{{ u.username }}</a><small class="text-muted h6"> joined {{ u.date_joined|date:"F Y" }} </small> </h2>
                     <a href="remove/{{ u.pk}} ">
-                        <button class="btn btn-outline-danger">Remove Friend</button>
+                        <button class="btn btn-outline-danger btn-sm mb-1">Remove Friend</button>
                     </a>
                 {% else %}
+                <h2 class="article-title"><a style="text-decoration: none; color: #333333" href="{% url 'user-posts' u.username %}">{{ u.username }}</a><small class="text-muted h6"> joined {{ u.date_joined|date:"F Y" }} </small> </h2>
                     <a href="add/{{ u.pk}} ">
-                        <button class="btn btn-outline-success">Add Friend</button>
+                        <button class="btn btn-outline-success btn-sm mb-2">Add Friend</button>
                     </a>
                 {% endif %}
             </div>
@@ -27,7 +30,7 @@
 {% block content-friends %}
 <div class="col-md-4">
     <div class="content-section">
-        <h3>Friends</h3>
+        <h3>My Friends</h3>
         <!-- <p class='text-muted'>You can put any information here you'd like. -->
         <ul class="list-group">
             {% for friend in friends %} <!-- add this to nav bar in base instead or clean this up -->
