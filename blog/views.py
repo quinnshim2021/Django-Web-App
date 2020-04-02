@@ -4,7 +4,17 @@ from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from .models import Post
 from django.contrib.auth.decorators import login_required
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
+from django.contrib import messages
 
+@login_required
+def not_found(request):
+    messages.add_message(request, messages.ERROR, 'Not working')
+    raise Http404()
+
+@login_required
+def not_found(request):
+    messages.add_message(request, messages.ERROR, 'Not working')
+    raise Http500()
 
 # old
 # @login_required
