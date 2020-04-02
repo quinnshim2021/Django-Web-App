@@ -33,6 +33,8 @@ def profile(request):
         u_form = UserUpdateForm(instance=request.user)
         p_form = ProfileUpdateForm(instance=request.user.profile)
 
+    print('\n\n\n\n\n', Friend.objects.get(current_user=request.user).users.all())
+
     context = {
         'u_form': u_form,
         'p_form': p_form,

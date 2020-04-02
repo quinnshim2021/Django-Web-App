@@ -37,7 +37,10 @@ class PostListView(LoginRequiredMixin, ListView):
 
     def get_context_data(self, **kwargs):
         context = super(PostListView, self).get_context_data(**kwargs)
-        context['friends'] = Friend.objects.get(current_user=self.request.user).users.all()
+        try:
+            context['friends'] = Friend.objects.get(current_user=self.request.user).users.all()
+        except:
+            context['friends'] = []
         context['posts'] = sorted([p for p in Post.objects.all() if p.author in context['friends'] or p.author == self.request.user], key=lambda x: x.date_posted, reverse=True)
         # [p for p in Post.objects.all() if p.author in context['friends']].order_by('-date_posted')
         return context
@@ -51,7 +54,11 @@ class UserListView(LoginRequiredMixin, ListView):
     def get_context_data(self, **kwargs):
         context = super(UserListView, self).get_context_data(**kwargs)
         context['users'] = User.objects.all().order_by('-username')
-        context['friends'] = Friend.objects.get(current_user=self.request.user).users.all()
+        try:
+            context['friends'] = Friend.objects.get(current_user=self.request.user).users.all()
+        except:
+            context['friends'] = []
+        
         return context
 
 
@@ -69,7 +76,10 @@ class UserPostListView(LoginRequiredMixin, ListView):
         context = super(UserPostListView, self).get_context_data(**kwargs)
         context['posts'] = self.get_queryset()
         context['u'] = get_object_or_404(User, username=self.kwargs.get('username'))
-        context['friends'] = list(Friend.objects.get(current_user=self.request.user).users.all())
+        try:
+            context['friends'] = Friend.objects.get(current_user=self.request.user).users.all()
+        except:
+            context['friends'] = []
         print(list(Friend.objects.get(current_user=self.request.user).users.all()))
         return context
 
@@ -79,7 +89,10 @@ class PostDetailView(LoginRequiredMixin, DetailView):
 
     def get_context_data(self, **kwargs):
         context = super(PostDetailView, self).get_context_data(**kwargs)
-        context['friends'] = list(Friend.objects.get(current_user=self.request.user).users.all())
+        try:
+            context['friends'] = Friend.objects.get(current_user=self.request.user).users.all()
+        except:
+            context['friends'] = []
         print(list(Friend.objects.get(current_user=self.request.user).users.all()))
         return context
 
@@ -96,7 +109,10 @@ class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     
     def get_context_data(self, **kwargs):
         context = super(PostDeleteView, self).get_context_data(**kwargs)
-        context['friends'] = list(Friend.objects.get(current_user=self.request.user).users.all())
+        try:
+            context['friends'] = Friend.objects.get(current_user=self.request.user).users.all()
+        except:
+            context['friends'] = []
         print(list(Friend.objects.get(current_user=self.request.user).users.all()))
         return context
 
@@ -113,7 +129,10 @@ class PostCreateView(LoginRequiredMixin, CreateView):
     
     def get_context_data(self, **kwargs):
         context = super(PostCreateView, self).get_context_data(**kwargs)
-        context['friends'] = list(Friend.objects.get(current_user=self.request.user).users.all())
+        try:
+            context['friends'] = Friend.objects.get(current_user=self.request.user).users.all()
+        except:
+            context['friends'] = []
         print(list(Friend.objects.get(current_user=self.request.user).users.all()))
         return context
 
@@ -136,7 +155,10 @@ class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     
     def get_context_data(self, **kwargs):
         context = super(PostUpdateView, self).get_context_data(**kwargs)
-        context['friends'] = list(Friend.objects.get(current_user=self.request.user).users.all())
+        try:
+            context['friends'] = Friend.objects.get(current_user=self.request.user).users.all()
+        except:
+            context['friends'] = []
         print(list(Friend.objects.get(current_user=self.request.user).users.all()))
         return context
 
