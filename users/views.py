@@ -33,12 +33,17 @@ def profile(request):
         u_form = UserUpdateForm(instance=request.user)
         p_form = ProfileUpdateForm(instance=request.user.profile)
 
-    print('\n\n\n\n\n', Friend.objects.get(current_user=request.user).users.all())
-
-    context = {
-        'u_form': u_form,
-        'p_form': p_form,
-        'friends': Friend.objects.get(current_user=request.user).users.all()
-    }
+    try:
+        context = {
+            'u_form': u_form,
+            'p_form': p_form,
+            'friends': Friend.objects.get(current_user=request.user).users.all()
+        }
+    except:
+        context = {
+            'u_form': u_form,
+            'p_form': p_form,
+            'friends': []
+        }
 
     return render(request, 'users/profile.html', context)
