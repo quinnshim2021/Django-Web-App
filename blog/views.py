@@ -133,7 +133,6 @@ class PostCreateView(LoginRequiredMixin, CreateView):
             context['friends'] = Friend.objects.get(current_user=self.request.user).users.all()
         except:
             context['friends'] = []
-        print(list(Friend.objects.get(current_user=self.request.user).users.all()))
         return context
 
 class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
