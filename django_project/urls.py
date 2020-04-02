@@ -23,7 +23,7 @@ from blog import views as blog_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('profile/user/<str:operation>/<int:pk>', blog_views.change_friend, name="change-friend"),
+    path('profile/user/<str:operation>/<int:pk>', blog_views.change_friend, name="change-friend"), # might delete later
     path('register/', user_views.register, name="register"),
     path('profile/', user_views.profile, name="profile"),
     path('login/', auth_views.LoginView.as_view(template_name="users/login.html"), name="login"),
