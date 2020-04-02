@@ -66,7 +66,7 @@ class UserPostListView(LoginRequiredMixin, ListView):
     
     def get_context_data(self, **kwargs):
         context = super(UserPostListView, self).get_context_data(**kwargs)
-        context['posts'] = Post.objects.all().order_by('-date_posted')
+        context['posts'] = self.get_queryset()
         context['friends'] = list(Friend.objects.get(current_user=self.request.user).users.all())
         print(list(Friend.objects.get(current_user=self.request.user).users.all()))
         return context
@@ -149,6 +149,9 @@ def change_friend(request, operation, pk):
         Friend.lose_friend(request.user, new_friend)
     else:
         raise Http403()
+
+    if request.META.get('HTTP_REFERER') is not None:
+        return redirect(request.META.get('HTTP_REFERER'))
     return redirect('blog-home')
 
 # def handler404(request, exception, template_name="404.html"):

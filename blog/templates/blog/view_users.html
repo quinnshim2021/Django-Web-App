@@ -1,16 +1,25 @@
 {% extends "blog/base.html" %}
 {% block content %}
-    {% for user in users %}
+    {% for u in users %}
         <!-- <article class="media content-section">
             <div>
-                <h2>{{ user.username }}</h2>
+                <h2>{{ u.username }}</h2>
             </div>
         </article> -->
         <article class="media content-section">
-            <img src="{{ user.profile.image.url }}" class="rounded-circle article-img">
+            <img src="{{ u.profile.image.url }}" class="rounded-circle article-img">
             <div class="media-body">
-                <h2 class="article-title">{{ user.username }} <small class="text-muted">- # of posts</small> </h2>
-                <button class="btn">Add Friend</button>
+                <h2 class="article-title">{{ u.username }} <small class="text-muted">- joined {{ u.date_joined|date:"F Y" }} </small> </h2>
+                {% if u == user %}
+                {% elif u in friends %}
+                    <a href="remove/{{ u.pk}} ">
+                        <button class="btn btn-outline-danger">Remove Friend</button>
+                    </a>
+                {% else %}
+                    <a href="add/{{ u.pk}} ">
+                        <button class="btn btn-outline-success">Add Friend</button>
+                    </a>
+                {% endif %}
             </div>
         </article>
     {% endfor %}
@@ -22,7 +31,7 @@
         <!-- <p class='text-muted'>You can put any information here you'd like. -->
         <ul class="list-group">
             {% for friend in friends %} <!-- add this to nav bar in base instead or clean this up -->
-             <li class="list-group-item list-group-item-light">{{ friend.username }}</li>
+             <li class="list-group-item list-group-item-light"><a href="{% url 'user-posts' friend.username %}">{{ friend.username }}</a></li>
             {% endfor %}
         </ul>
         </p>
