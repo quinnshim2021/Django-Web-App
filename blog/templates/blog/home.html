@@ -1,5 +1,8 @@
 {% extends "blog/base.html" %}
 {% block content %}
+    {% if is_paginated %}
+        <h1>{{ page_obj }}</h1>
+    {% endif %}
     {% for post in posts %}
         <article class="media content-section">
             <img src="{{ post.author.profile.image.url }}" class="rounded-circle article-img">
@@ -18,7 +21,8 @@
             </div>
         </article>
     {% endfor %}
-    {% if is_paginated %}
+
+    <!-- {% if is_paginated %}
         
         {% if page_obj.has_previous %}
             <a class="btn btn-outline-info mb-4" href="?page=1">First</a>
@@ -38,7 +42,21 @@
             <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.paginator.num_pages }}">Last</a>
         {% endif %}
 
-    {% endif %}
+    {% endif %} -->
 {% endblock content %}
+{% block content-friends %}
+<div class="col-md-4">
+    <div class="content-section">
+        <h3>Friends</h3>
+        <!-- <p class='text-muted'>You can put any information here you'd like. -->
+        <ul class="list-group">
+            {% for friend in friends %} <!-- add this to nav bar in base instead or clean this up -->
+             <li class="list-group-item list-group-item-light">{{ friend.username }}</li>
+            {% endfor %}
+        </ul>
+        </p>
+    </div>
+</div>
+{% endblock %}
 
 <!-- can do this for multiple blocks -->
