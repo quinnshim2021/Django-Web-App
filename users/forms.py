@@ -13,7 +13,7 @@ class UserRegisterForm(UserCreationForm):
 
 # allow us to update username and email
 class UserUpdateForm(forms.ModelForm):
-    email = forms.EmailField()
+    email = forms.EmailField(required=False)
 
     class Meta:
         model = User
@@ -21,6 +21,9 @@ class UserUpdateForm(forms.ModelForm):
 
 # allow us to update profile image
 class ProfileUpdateForm(forms.ModelForm):
+    image = forms.ImageField()
+    description = forms.CharField(required=False)
+
     class Meta:
         model = Profile
         fields = ['image', 'description']
