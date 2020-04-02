@@ -80,7 +80,6 @@ class UserPostListView(LoginRequiredMixin, ListView):
             context['friends'] = Friend.objects.get(current_user=self.request.user).users.all()
         except:
             context['friends'] = []
-        print(list(Friend.objects.get(current_user=self.request.user).users.all()))
         return context
 
 class PostDetailView(LoginRequiredMixin, DetailView):
@@ -93,7 +92,6 @@ class PostDetailView(LoginRequiredMixin, DetailView):
             context['friends'] = Friend.objects.get(current_user=self.request.user).users.all()
         except:
             context['friends'] = []
-        print(list(Friend.objects.get(current_user=self.request.user).users.all()))
         return context
 
 class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
@@ -113,7 +111,6 @@ class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
             context['friends'] = Friend.objects.get(current_user=self.request.user).users.all()
         except:
             context['friends'] = []
-        print(list(Friend.objects.get(current_user=self.request.user).users.all()))
         return context
 
 class PostCreateView(LoginRequiredMixin, CreateView):
@@ -158,7 +155,6 @@ class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
             context['friends'] = Friend.objects.get(current_user=self.request.user).users.all()
         except:
             context['friends'] = []
-        print(list(Friend.objects.get(current_user=self.request.user).users.all()))
         return context
 
 def about(request):
